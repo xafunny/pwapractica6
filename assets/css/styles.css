@@ -1,0 +1,261 @@
+/* =====================================================================
+ * assets/css/styles.css  -  Estilos propios de Fuerza Pro
+ * =====================================================================
+ * Se apoya en Bootstrap 5 (tema oscuro: data-bs-theme="dark") y le
+ * aplica la identidad visual original de Fuerza Pro:
+ *   - fondo casi negro, tarjetas grafito y acento rojo
+ *   - títulos con la fuente "Bebas Neue"
+ * Organización:
+ *   1. Variables (tokens de color)        6. Métricas y tarjetas
+ *   2. Sobrescritura de Bootstrap         7. Clases y reservas
+ *   3. Base y tipografía                  8. Rutina (ejercicios)
+ *   4. Navbar y pie                       9. Utilidades y animaciones
+ *   5. Login / registro                  10. Responsive
+ * ===================================================================== */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  --fp-bg:     #0c0c0d;
+  --fp-sur:    #131315;
+  --fp-card:   #1a1a1d;
+  --fp-brd:    #27272a;
+  --fp-brd2:   #3f3f46;
+  --fp-acc:    #b91c1c;
+  --fp-acch:   #dc2626;
+  --fp-txt:    #fafafa;
+  --fp-txt2:   #a1a1aa;
+  --fp-ok:     #22c55e;
+  --fp-radio:  14px;
+}
+
+/* ---------- 2. Ajustes al tema oscuro de Bootstrap ---------- */
+[data-bs-theme="dark"] {
+  --bs-body-bg: var(--fp-bg);
+  --bs-body-color: var(--fp-txt);
+  --bs-secondary-color: var(--fp-txt2);
+  --bs-border-color: var(--fp-brd);
+  --bs-tertiary-bg: var(--fp-sur);
+  --bs-body-font-family: 'Inter', system-ui, sans-serif;
+  --bs-danger: var(--fp-acch);
+  --bs-danger-rgb: 220, 38, 38;
+  --bs-link-color-rgb: 250, 250, 250;
+}
+.btn-danger {
+  --bs-btn-bg: var(--fp-acc);
+  --bs-btn-border-color: var(--fp-acc);
+  --bs-btn-hover-bg: var(--fp-acch);
+  --bs-btn-hover-border-color: var(--fp-acch);
+  --bs-btn-active-bg: #991b1b;
+}
+.form-control, .form-select {
+  background-color: var(--fp-sur);
+  border-color: var(--fp-brd2);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--fp-acch);
+  box-shadow: 0 0 0 .2rem rgba(220, 38, 38, .2);
+  background-color: var(--fp-sur);
+}
+.form-check-input:checked { background-color: var(--fp-acch); border-color: var(--fp-acch); }
+.table { --bs-table-bg: transparent; --bs-table-hover-bg: rgba(255,255,255,.03); margin-bottom: 0; }
+.table > thead th {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--fp-txt2); font-weight: 600; border-bottom-color: var(--fp-brd2);
+}
+.modal-content { background: var(--fp-card); border: 1px solid var(--fp-brd); border-radius: var(--fp-radio); }
+.dropdown-menu { background: var(--fp-card); border-color: var(--fp-brd); }
+.list-group { --bs-list-group-bg: transparent; --bs-list-group-border-color: var(--fp-brd); }
+.list-group-item-action:hover { background: var(--fp-sur); }
+
+/* ---------- 3. Base y tipografía ---------- */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+.fp-main { flex: 1; }
+.fp-logo, .fp-title, .fp-display, .fp-stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1.5px;
+}
+.fp-logo { font-size: 1.6rem; color: var(--fp-txt); line-height: 1; }
+.fp-logo span { color: var(--fp-acch); }
+.fp-logo.small { font-size: 1.05rem; }
+.fp-logo-xl { font-size: 4.5rem; }
+.fp-title { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: .2rem; line-height: 1.05; }
+
+.fp-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- 4. Navbar y pie ---------- */
+.fp-navbar {
+  background: rgba(19, 19, 21, .92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--fp-brd);
+}
+.fp-navbar .nav-link {
+  color: var(--fp-txt2);
+  font-weight: 500;
+  font-size: .9rem;
+  border-radius: 8px;
+  padding: .45rem .75rem !important;
+  transition: color .2s, background .2s;
+}
+.fp-navbar .nav-link:hover { color: var(--fp-txt); }
+.fp-navbar .nav-link.active { color: #fff; background: rgba(220, 38, 38, .15); }
+.fp-navbar .nav-link.active i { color: var(--fp-acch); }
+
+.fp-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--fp-acc), #7f1d1d);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .8rem;
+  flex-shrink: 0;
+}
+.fp-avatar-lg { width: 46px; height: 46px; font-size: 1rem; }
+.fp-avatar-xl { width: 68px; height: 68px; font-size: 1.5rem; }
+
+.fp-footer {
+  border-top: 1px solid var(--fp-brd);
+  padding: 1.2rem 0;
+  font-size: .8rem;
+  color: var(--fp-txt2);
+}
+
+/* ---------- 5. Login / registro ---------- */
+.fp-auth {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+}
+@media (min-width: 992px) { .fp-auth { grid-template-columns: 1.1fr .9fr; } }
+.fp-auth-box { max-width: 440px; width: 100%; justify-self: center; }
+.fp-feature-list li { padding: .45rem 0; color: var(--fp-txt2); }
+.fp-feature-list i { color: var(--fp-acch); margin-right: .6rem; }
+
+/* ---------- 6. Métricas y tarjetas ---------- */
+.fp-card {
+  background: var(--fp-card);
+  border: 1px solid var(--fp-brd);
+  border-radius: var(--fp-radio);
+  color: var(--fp-txt);
+  transition: border-color .2s, transform .2s;
+}
+.fp-card > .card-header, .fp-card > .card-footer {
+  background: transparent;
+  border-color: var(--fp-brd);
+}
+a.fp-card:hover { border-color: var(--fp-acc); transform: translateY(-2px); }
+
+.fp-stat { position: relative; overflow: hidden; }
+.fp-stat-icon {
+  position: absolute; right: 14px; top: 10px;
+  font-size: 2.2rem; color: rgba(220, 38, 38, .25);
+}
+.fp-stat-value { font-size: 2.4rem; line-height: 1; color: var(--fp-txt); }
+.fp-stat-value small { font-size: 1rem; color: var(--fp-txt2); }
+.fp-stat-label {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--fp-txt2); font-weight: 600;
+}
+.fp-icon-box {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(220, 38, 38, .12); color: var(--fp-acch);
+  display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+}
+
+.fp-progress { height: 6px; background: var(--fp-brd); border-radius: 6px; }
+.fp-progress-lg { height: 10px; }
+.fp-progress .progress-bar { transition: width .5s ease; }
+
+/* Pestañas tipo "pastilla" */
+.fp-pills { gap: .4rem; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.fp-pills::-webkit-scrollbar { display: none; }
+.fp-pills .nav-link {
+  color: var(--fp-txt2);
+  border: 1px solid var(--fp-brd);
+  border-radius: 999px;
+  padding: .35rem 1rem;
+  font-size: .85rem;
+  white-space: nowrap;
+  position: relative;
+}
+.fp-pills .nav-link.active { background: var(--fp-acc); border-color: var(--fp-acc); color: #fff; }
+.fp-hoy {
+  position: absolute; top: 4px; right: 6px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--fp-ok);
+}
+
+.fp-chip {
+  display: inline-block;
+  font-size: .72rem;
+  padding: .18rem .55rem;
+  border-radius: 999px;
+  background: var(--fp-sur);
+  border: 1px solid var(--fp-brd2);
+  color: var(--fp-txt2);
+}
+.fp-chip-acc { border-color: var(--fp-acc); color: #fca5a5; }
+
+.fp-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px dashed var(--fp-brd2);
+  border-radius: var(--fp-radio);
+  color: var(--fp-txt2);
+}
+.fp-empty i { font-size: 2.2rem; display: block; margin-bottom: .5rem; color: var(--fp-brd2); }
+.fp-empty p { margin: 0; }
+
+.fp-search { max-width: 280px; }
+.fp-chart { position: relative; height: 300px; }
+
+/* ---------- 7. Clases y reservas ---------- */
+.fp-clase { transition: border-color .25s, box-shadow .25s; }
+.fp-clase:hover { border-color: var(--fp-brd2); }
+.fp-clase-reservada { border-color: var(--fp-ok); box-shadow: 0 0 0 1px rgba(34, 197, 94, .25); }
+
+/* ---------- 8. Rutina: tarjetas de ejercicio ---------- */
+.fp-check {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--fp-brd2);
+  background: transparent;
+  color: transparent;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  transition: all .2s;
+}
+.fp-check:hover { border-color: var(--fp-ok); color: rgba(34, 197, 94, .5); }
+.fp-check:focus-visible { outline: 2px solid var(--fp-ok); outline-offset: 2px; }
+.fp-hecho { border-color: rgba(34, 197, 94, .45); }
+.fp-hecho .fp-check { background: var(--fp-ok); border-color: var(--fp-ok); color: #052e16; animation: pop .3s ease; }
+.fp-hecho .fp-ej-nombre { text-decoration: line-through; color: var(--fp-txt2); }
+
+/* ---------- 9. Utilidades y animaciones ---------- */
+@keyframes pop { 50% { transform: scale(1.18); } }
+@keyframes aparecer { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.fp-main > * { animation: aparecer .35s ease both; }
+.fp-salida { transition: opacity .3s, transform .3s; opacity: 0; transform: scale(.95); }
+
+/* ---------- 10. Responsive ---------- */
+@media (max-width: 575.98px) {
+  .fp-page-head { align-items: stretch; }
+  .fp-page-head > .btn, .fp-search { width: 100%; max-width: none; }
+  .fp-stat-value { font-size: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
